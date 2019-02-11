@@ -3,7 +3,9 @@
 This tool kit is very much influenced by infosecn1nja's kit.
 Use this script to grab majority of the repos.
 
-*NOTE: hard coded in /opt and made for Kali Linux
+
+**NOTE: hard coded in /opt and made for Kali Linux
+**Total Size (so far): 2.5G
 
 ## Contents
 * [Reconnaissance](#reconnaissance)
