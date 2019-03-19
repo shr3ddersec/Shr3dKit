@@ -89,7 +89,7 @@ else
   echo -e "${YELLOW}Grabbing Prerequisites.${NC}"
   sudo apt-get install build-essential cmake -y ; sudo apt-get install libgtk-3-dev -y ; sudo apt-get install libboost-all-dev -y
   echo -e "${YELLOW}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/social_mapper ; python -m pip install --no-cache-dir -r requirements.txt
+  cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/social_mapper/setup ; python -m pip install --no-cache-dir -r requirements.txt
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/skiptracer/.git ]; then
