@@ -6,7 +6,24 @@ Use this script to grab majority of the repos.
 
 **NOTE: hard coded in /opt and made for Kali Linux**
 
-**Total Size (so far): 2.5G**
+**Total Size (so far): 2.5+Gb**
+
+Install Guide:
+```
+git clone https://github.com/shr3ddersec/Shr3dKit.git
+pip install -r requirements.txt
+bash shr3dkit.sh
+```
+**Change Log**
+```
+Fixed: macro_pack, LaZagne
+Code: Added all requirements to script, seperated pip requirements and merged to one file.
+
+Tools Added: Modlishka, pwndb, cat-sites, Phantom-Evasion
+```
+**Phantom Evasion Forewarning**
+
+Currently pursuing a permanent an IT Sec role, for personal budgeting I added this tool as does a fantastic job for AV Evasion without opening up your wallet. *Keep in mind, this does have crypto miner (xmr-stak) installer option. I kept the complete install out of script purposely for this reason*. To disable, please change ```Miner=False``` in Setup/Config.txt then run the script. You may always keep it on to help the devs, such as myself in my home lab.
 
 ## Contents
 * [Reconnaissance](#reconnaissance)
@@ -19,6 +36,7 @@ Use this script to grab majority of the repos.
 * [Data Exfiltration](#data-exfiltration)
 * [Misc](#misc)
 * [References](#references)
+
 
 ## Reconnaissance
 ### Active Intelligence Gathering
@@ -44,6 +62,8 @@ hosts, open ports/ banners, and employee names from different public sources. ht
 * **typofinder** a finder of domain typos showing country of IP address. https://github.com/nccgroup/typofinder
 * **pwnedOrNot** is a python script which checks if the email account has been compromised in a data breach, if the email account is compromised it proceeds to find passwords for the compromised account. https://github.com/thewhiteh4t/pwnedOrNot
 * **GitHarvester** This tool is used for harvesting information from GitHub like google dork. https://github.com/metac0rtex/GitHarvester
+
+* **pwndb** is a python command-line tool for searching leaked credentials using the Onion service with the same name. https://github.com/davidtavarez/pwndb/
 
 ### Frameworks
 * **Maltego** is a unique platform developed to deliver a clear threat picture to the environment that an organization owns and operates. https://www.paterva.com/web7/downloads.php
@@ -105,6 +125,7 @@ hosts, open ports/ banners, and employee names from different public sources. ht
 * **Ebowla** Framework for Making Environmental Keyed Payloads. https://github.com/Genetic-Malware/Ebowla
 * **make-pdf-embedded** a tool to create a PDF document with an embedded file. https://github.com/DidierStevens/DidierStevensSuite/blob/master/make-pdf-embedded.py
 * **avet** (AntiVirusEvasionTool) is targeting windows machines with executable files using different evasion techniques. https://github.com/govolution/avet
+* **Phantom-Evasion** Interactive antivirus evasion tool written in python capable to generate (almost) FUD executable even with the most common 32 bit msfvenom payload (lower detection ratio with 64 bit payloads). https://github.com/oddcod3/Phantom-Evasion **WARNING**: Please be aware this does install a Minero miner by default. This can be changed in the **Setup** folder and edit **Config.txt** and edit *Mining = False*. If you want to support the project and developers, I would recommend keeping on. 
 
 ## Delivery
 ### Phishing
@@ -116,7 +137,7 @@ hosts, open ports/ banners, and employee names from different public sources. ht
 * **PwnAuth** a web application framework for launching and managing OAuth abuse campaigns. https://github.com/fireeye/PwnAuth
 * **Phishing Frenzy** Ruby on Rails Phishing Framework. https://github.com/pentestgeek/phishing-frenzy
 * **Phishing Pretexts** a library of pretexts to use on offensive phishing engagements. https://github.com/L4bF0x/PhishingPretexts
-* ***Modlishka** is a flexible and powerful reverse proxy, that will take your ethical phishing campaigns to the next level. https://github.com/drk1wi/Modlishka
+* **Modlishka** is a flexible and powerful reverse proxy, that will take your ethical phishing campaigns to the next level. https://github.com/drk1wi/Modlishka
 
 ### Watering Hole Attack
 * **BeEF** is short for The Browser Exploitation Framework. It is a penetration testing tool that focuses on the web browser. https://github.com/beefproject/beef
@@ -168,6 +189,7 @@ data stream as a sequence of HTTPS requests and responses. https://github.com/ar
 * **RedFile** a flask wsgi application that serves files with intelligence, good for serving conditional RedTeam payloads. https://github.com/outflanknl/RedFile
 * **keyserver** Easily serve HTTP and DNS keys for proper payload protection. https://github.com/leoloobeek/keyserver
 * **DoHC2** allows the ExternalC2 library from Ryan Hanson (https://github.com/ryhanson/ExternalC2) to be leveraged for command and control (C2) via DNS over HTTPS (DoH). This is built for the popular Adversary Simulation and Red Team Operations Software Cobalt Strike (https://www.cobaltstrike.com). https://github.com/SpiderLabs/DoHC2
+* **cat-sites** Library of sites for categorization. https://github.com/audrummer15/cat-sites
 
 ## Lateral Movement
 * **CrackMapExec** is a swiss army knife for pentesting networks. https://github.com/byt3bl33d3r/CrackMapExec
