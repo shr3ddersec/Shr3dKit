@@ -1,6 +1,16 @@
 #!/bin/bash
-
-###Shr3dder Red-Team Toolkit Script###
+# 
+#  ███████╗██╗  ██╗██████╗ ██████╗ ██████╗ ██╗  ██╗██╗████████╗
+#  ██╔════╝██║  ██║██╔══██╗╚════██╗██╔══██╗██║ ██╔╝██║╚══██╔══╝
+#  ███████╗███████║██████╔╝ █████╔╝██║  ██║█████╔╝ ██║   ██║   
+#  ╚════██║██╔══██║██╔══██╗ ╚═══██╗██║  ██║██╔═██╗ ██║   ██║   
+#  ███████║██║  ██║██║  ██║██████╔╝██████╔╝██║  ██╗██║   ██║   
+#  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   
+#                 -Influenced by infosecn1nja-
+#                   -Script by Shr3dderSec-
+#
+# Do not use this script for assisting in illegal activity, I take no responsibility in your actions.
+# 
 
 # Global variables
 BLUE='\033[1;34m'
@@ -8,19 +18,23 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Check theHarvester.py permissions
-#perms=$(stat /usr/share/theharvester/theHarvester.py | grep -m1 'Access' | cut -d '/' -f2 | cut -d ')' -f1)
-#if [ "$perms" == '-rw-r--r--' ]; then
-#     chmod 755 /usr/share/theharvester/theHarvester.py
-#fi
+perms=$(stat /usr/share/theharvester/theHarvester.py | grep -m1 'Access' | cut -d '/' -f2 | cut -d ')' -f1)
+if [ "$perms" == '-rw-r--r--' ]; then
+     chmod 755 /usr/share/theharvester/theHarvester.py
+fi
 
-#Updating Kali
+# Updating Kali 
 echo -e "${BLUE}Updating Kali.${NC}"
-apt-get update ; apt-get -y upgrade ; apt-get -y dist-upgrade ; apt-get -y autoremove ; apt-get -y autoclean ; echo
+apt update ; apt-get -y upgrade ; apt-get -y dist-upgrade ; apt-get -y autoremove ; apt-get -y autoclean ; echo
+
+# Installing Dependencies for the repos
+apt -y install git apache2 python-requests libapache2-mod-php python-pymssql build-essential python-pexpect python-pefile python-crypto python-openssl libssl1.0-dev libffi-dev python-dev python-pip tcpdump python-virtualenv build-essential cmake libgtk-3-dev libboost-all-dev ; echo
 
 # Making Directories
 mkdir -p /opt/RedTeam-Toolkit/{Reconnaissance/{Active,Passive},Frameworks,Weaponization,Delivery/{Phishing},"Command and Control"/{"Remote Access",Staging},"Lateral Movement","Establish Foothold","Escalate Privileges"/{"Domain Escalation","Local Escalation"},"Data Exfiltration"}
 
 # Active Intelligence Gathering
+
 echo -e "${YELLOW}Checking Active Intelligence Gathering.${NC}"
 
 if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Active/EyeWitness/.git ]; then
@@ -38,8 +52,8 @@ if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Active/AWSBucketDump/.git ]; then
      cd /opt/RedTeam-Toolkit/Reconnaissance/Active/AWSBucketDump ; git pull
      echo
 else
-  echo -e "${YELLOW}Downloading AWSBucketDump & Grabbing Requirements.${NC}"
-  git clone https://github.com/jordanpotti/AWSBucketDump.git /opt/RedTeam-Toolkit/Reconnaissance/Active/EyeWitness ; pip install -r /opt/RedTeam-Toolkit/Reconnaissance/Active/EyeWitness/requirements.txt
+  echo -e "${YELLOW}Downloading AWSBucketDump.${NC}"
+  git clone https://github.com/jordanpotti/AWSBucketDump.git /opt/RedTeam-Toolkit/Reconnaissance/Active/EyeWitness
   echo
 fi
 
@@ -60,8 +74,6 @@ if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Active/spoofcheck/.git ]; then
 else
   echo -e "${YELLOW}Downloading spoofcheck.${NC}"
   git clone https://github.com/BishopFox/spoofcheck.git /opt/RedTeam-Toolkit/Reconnaissance/Active/spoofcheck
-  echo -e "${YELLOW}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Reconnaissance/Active/spoofcheck ; pip install -r requirements.txt
   echo
 fi
 
@@ -86,10 +98,6 @@ else
   echo -e "${YELLOW}Downloading Social Mapper.${NC}"
   git clone https://github.com/SpiderLabs/social_mapper.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/social_mapper
   echo
-  echo -e "${YELLOW}Grabbing Prerequisites.${NC}"
-  sudo apt-get install build-essential cmake -y ; sudo apt-get install libgtk-3-dev -y ; sudo apt-get install libboost-all-dev -y
-  echo -e "${YELLOW}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/social_mapper/setup ; python -m pip install --no-cache-dir -r requirements.txt
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/skiptracer/.git ]; then
@@ -100,8 +108,6 @@ else
   echo -e "${YELLOW}Downloading Skiptracer.${NC}"
   git clone https://github.com/xillwillx/skiptracer.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/skiptracer
   echo
-  echo -e "${YELLOW}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/skiptracer ; pip install -r requirements.txt
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/ScrapedIn/.git ]; then
@@ -122,9 +128,6 @@ else
   echo -e "${YELLOW}Downloading linkScrape.${NC}"
   git clone https://github.com/NickSanzotta/linkScrape.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape
   echo
-  echo -e "${YELLOW}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape ; pip install -r requirements.txt
-  echo
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/FOCA/.git ]; then
@@ -135,18 +138,6 @@ else
   echo -e "${YELLOW}Downloading FOCA.${NC}"
   git clone https://github.com/ElevenPaths/FOCA.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape
   echo
-fi
-
-if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/theHarvester/.git ]; then
-     echo -e "${BLUE}Updating theHarvester.${NC}"
-     cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/theHarvester ; git pull
-     echo
-else
-  echo -e "${YELLOW}Downloading theHarvester.${NC}"
-  git clone https://github.com/laramies/theHarvester.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/theHarvester
-  echo
-  echo -e "${YELLOW}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/theHarvester ; pip install -r requirements.txt
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/metagoofil/.git ]; then
@@ -176,8 +167,6 @@ if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/truffleHog/.git ]; then
 else
   echo -e "${YELLOW}Downloading truffleHog.${NC}"
   git clone https://github.com/dxa4481/truffleHog.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/truffleHog
-  echo
-  cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/truffleHog ; pip install -r requirements.txt
   echo
 fi
 
@@ -224,7 +213,18 @@ else
   echo
 fi
 
-#Reconnaissance Frameworks
+if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/pwndb/.git ]; then
+     echo -e "${BLUE}Updating pwndb.${NC}"
+     cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/pwndb ; git pull
+     echo
+else
+  echo -e "${YELLOW}Downloading GitHarvester.${NC}"
+  git clone https://github.com/davidtavarez/pwndb.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/pwndb
+  echo
+fi
+
+# Reconnaissance Frameworks
+
 echo -e "${YELLOW}Checking Frameworks.${NC}"
 
 if [ -d /opt/RedTeam-Toolkit/Frameworks/spiderfoot/.git ]; then
@@ -248,9 +248,6 @@ else
   echo -e "${YELLOW}Downloading datasploit.${NC}"
   git clone https://github.com/DataSploit/datasploit.git /opt/RedTeam-Toolkit/Frameworks/datasploit
   echo
-  echo -e "${YELLOW}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Frameworks/datasploit ; pip install --upgrade --force-reinstall -r requirements.txt
-  echo
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Frameworks/recon-ng/.git ]; then
@@ -264,6 +261,7 @@ else
 fi
 
 # Weaponization (Exploits)
+
 echo -e "${YELLOW}Checking Exploits.${NC}"
 
 if [ -d /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8570/.git ]; then
@@ -504,10 +502,7 @@ if [ -d /opt/RedTeam-Toolkit/Weaponization/macro_pack/.git ]; then
      echo
 else
   echo -e "${YELLOW}Downloading macro_pack.${NC}"
-  git clone https://github.com/Mr-Un1k0d3r/ClickOnceGenerator.git /opt/RedTeam-Toolkit/Weaponization/macro_pack
-  echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Weaponization/macro_pack ; pip install -r requirements.txt
+  git https://github.com/sevagas/macro_pack.git /opt/RedTeam-Toolkit/Weaponization/macro_pack
   echo
 fi
 
@@ -539,9 +534,6 @@ else
   echo -e "${YELLOW}Downloading nps_payload.${NC}"
   git clone https://github.com/trustedsec/nps_payload.git /opt/RedTeam-Toolkit/Weaponization/nps_payload
   echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Weaponization/nps_payload ; pip install -r requirements.txt
-  echo
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Weaponization/SocialEngineeringPayloads/.git ]; then
@@ -559,9 +551,6 @@ if [ -d /opt/RedTeam-Toolkit/Weaponization/social-engineer-toolkit/.git ]; then
      cd /opt/RedTeam-Toolkit/Weaponization/social-engineer-toolkit ; git pull
      echo
 else
-  echo -e "${BLUE}Grabbing Dependencies.${NC}"
-  apt-get -y install git apache2 python-requests libapache2-mod-php \
-  python-pymssql build-essential python-pexpect python-pefile python-crypto python-openssl
   echo -e "${YELLOW}Downloading The Social-Engineer Toolkit.${NC}"
   git clone https://github.com/trustedsec/social-engineer-toolkit.git /opt/RedTeam-Toolkit/Weaponization/social-engineer-toolkit
   echo
@@ -717,8 +706,6 @@ else
   echo -e "${YELLOW}Downloading SpookFlare.${NC}"
   git clone https://github.com/hlldz/SpookFlare.git /opt/RedTeam-Toolkit/Weaponization/SpookFlare
   echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/Weaponization/SpookFlare ; pip install -r requirements.txt
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Weaponization/GreatSCT/.git ]; then
@@ -827,6 +814,16 @@ else
   echo -e "${BLUE}Please check the directory and run the install.sh.${NC}"
 fi
 
+if [ -d /opt/RedTeam-Toolkit/Delivery/Phishing/Modlishka/.git ]; then
+     echo -e "${BLUE}Updating Modlishka.${NC}"
+     cd /opt/RedTeam-Toolkit/Delivery/Phishing/Modlishka; git pull
+     echo
+else
+  echo -e "${YELLOW}Downloading Modlishka.${NC}"
+  git clone https://github.com/drk1wi/Modlishka.git /opt/RedTeam-Toolkit/Delivery/Phishing/Modlishka
+  echo
+fi
+
 ##Command and Control##
 #Remote Access Tools#
 #File Path - "Command and Control"/"Remote Access"
@@ -856,9 +853,6 @@ if [ -d /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/Pupy/.git ]; 
      cd /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/Pupy/; git pull
      echo
 else
-  echo -e "${BLUE}Grabbing Dependencies First.${NC}"
-  apt-get install git libssl1.0-dev libffi-dev python-dev python-pip tcpdump python-virtualenv -y
-  echo
   echo -e "${YELLOW}Downloading pupy.${NC}"
   git clone https://github.com/n1nj4sec/pupy.git /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/Pupy/
   echo
@@ -871,9 +865,6 @@ if [ -d /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/Koadic/.git ]
 else
   echo -e "${YELLOW}Downloading Koadic.${NC}"
   git clone https://github.com/zerosum0x0/koadic.git /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/koadic/
-  echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  pip install -r /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/koadic/requirements.txt
   echo
 fi
 
@@ -968,9 +959,6 @@ if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/domainhunter/.git ]; 
 else
   echo -e "${YELLOW}Downloading Domain Hunter.${NC}"
   git clone https://github.com/threatexpress/domainhunter.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/domainhunter/
-  echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  pip install -r /opt/RedTeam-Toolkit/"Command and Control"/Staging/domainhunter/requirements.txt
   echo
 fi
 
@@ -1234,9 +1222,6 @@ else
   echo -e "${YELLOW}Downloading RedFile.${NC}"
   git clone https://github.com/outflanknl/RedFile.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/RedFile/
   echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  pip install -r /opt/RedTeam-Toolkit/"Command and Control"/Staging/RedFile/requirements.txt
-  echo
 fi
 
 if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/keyserver/.git ]; then
@@ -1266,6 +1251,26 @@ if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/DoHC2/.git ]; then
 else
   echo -e "${YELLOW}Downloading DoHC2.${NC}"
   git clone https://github.com/SpiderLabs/DoHC2.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/DoHC2/
+  echo
+fi
+
+if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/cat-sites/.git ]; then
+     echo -e "${BLUE}Updating cat-sites.${NC}"
+     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/cat-sites/; git pull
+     echo
+else
+  echo -e "${YELLOW}Downloading cat-sites.${NC}"
+  git clone https://github.com/audrummer15/cat-sites.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/cat-sites/
+  echo
+fi
+
+if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/now-you-see-me/.git ]; then
+     echo -e "${BLUE}Updating now-you-see-me.${NC}"
+     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/now-you-see-me/; git pull
+     echo
+else
+  echo -e "${YELLOW}Downloading now-you-see-me.${NC}"
+  git clone https://github.com/audrummer15/now-you-see-me.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/now-you-see-me/
   echo
 fi
 
@@ -1321,9 +1326,6 @@ if [ -d /opt/RedTeam-Toolkit/"Lateral Movement"/DeathStar/.git ]; then
 else
   echo -e "${YELLOW}Downloading DeathStar.${NC}"
   git clone https://github.com/byt3bl33d3r/DeathStar.git /opt/RedTeam-Toolkit/"Lateral Movement"/DeathStar/
-  echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  pip install -r /opt/RedTeam-Toolkit/"Lateral Movement"/DeathStar/requirements.txt
   echo
 fi
 
@@ -1468,9 +1470,6 @@ else
   echo -e "${YELLOW}Downloading LaZagne.${NC}"
   git clone https://github.com/AlessandroZ/LaZagne.git /opt/RedTeam-Toolkit/"Lateral Movement"/LaZagne/
   echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  pip install pyasn1 psutil secretstorage ; pip install https://github.com/n1nj4sec/memorpy/archive/master.zip
-  echo
 fi
 
 if [ -d /opt/RedTeam-Toolkit/"Lateral Movement"/KeeThief/.git ]; then
@@ -1510,9 +1509,6 @@ if [ -d /opt/RedTeam-Toolkit/"Lateral Movement"/impacket/.git ]; then
 else
   echo -e "${YELLOW}Downloading Impacket.${NC}"
   git clone https://github.com/SecureAuthCorp/impacket.git /opt/RedTeam-Toolkit/"Lateral Movement"/impacket/
-  echo
-  echo -e "${BLUE}Piping Requirements.${NC}"
-  pip install -r /opt/RedTeam-Toolkit/"Lateral Movement"/impacket/requirements.txt
   echo
   echo -e "${YELLOW}Running Setup.${NC}"
   /usr/bin/python /opt/RedTeam-Toolkit/"Lateral Movement"/impacket/setup.py install
@@ -1866,9 +1862,6 @@ if [ -d /opt/RedTeam-Toolkit/"Data Exfiltration"/PyExfil/.git ]; then
 else
   echo -e "${YELLOW}Downloading PyExfil.${NC}"
   git clone https://github.com/ytisf/PyExfil.git /opt/RedTeam-Toolkit/"Data Exfiltration"/PyExfil/
-  echo
-  echo -e "${YELLOW}Piping Requirements.${NC}"
-  cd /opt/RedTeam-Toolkit/"Data Exfiltration"/PyExfil/ ; pip install -r requirements.txt
   echo
 fi
 
