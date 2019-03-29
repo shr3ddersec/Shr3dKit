@@ -125,6 +125,7 @@ hosts, open ports/ banners, and employee names from different public sources. ht
 * **Ebowla** Framework for Making Environmental Keyed Payloads. https://github.com/Genetic-Malware/Ebowla
 * **make-pdf-embedded** a tool to create a PDF document with an embedded file. https://github.com/DidierStevens/DidierStevensSuite/blob/master/make-pdf-embedded.py
 * **avet** (AntiVirusEvasionTool) is targeting windows machines with executable files using different evasion techniques. https://github.com/govolution/avet
+* **gscript** A tool for bundeling multiple arbitrary binaries with execution scripts in a single executable dropper. https://github.com/gen0cide/gscript 
 * **Phantom-Evasion** Interactive antivirus evasion tool written in python capable to generate (almost) FUD executable even with the most common 32 bit msfvenom payload (lower detection ratio with 64 bit payloads). https://github.com/oddcod3/Phantom-Evasion **WARNING**: Please be aware this does install a Minero miner by default. This can be changed in the **Setup** folder and edit **Config.txt** and edit *Mining = False*. If you want to support the project and developers, I would recommend keeping on. 
 
 ## Delivery
