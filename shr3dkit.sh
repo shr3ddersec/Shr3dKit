@@ -801,6 +801,15 @@ else
   /usr/bin/bash /opt/RedTeam-Toolkit/Weaponization/avet/setup.sh
   echo
 fi
+if [ -d /opt/RedTeam-Toolkit/Weaponization/gscript/.git ]; then
+     echo -e "${BLUE}Updating gscript (Genesis Scripting Engine).${NC}"
+     cd /opt/RedTeam-Toolkit/Weaponization/gscript; git pull
+     echo
+else
+  echo -e "${YELLOW}Downloading gscript (Genesis Scripting Engine).${NC}"
+  git clone https://github.com/gen0cide/gscript.git /opt/RedTeam-Toolkit/Weaponization/gscript
+  echo
+fi
 
 # Delivery
 if [ -d /opt/RedTeam-Toolkit/Delivery/Phishing/CredSniper/.git ]; then
