@@ -51,7 +51,7 @@ python-docx
 pytube
 pyvirtualdisplay
 qrcode
-requests==2.13.0
+requests
 rjsmin
 scikit-image
 scikit-learn
