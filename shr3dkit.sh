@@ -263,7 +263,6 @@ fi
 # Weaponization (Exploits)
 
 echo -e "${YELLOW}Checking Exploits.${NC}"
-
 if [ -d /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8570/.git ]; then
      echo -e "${BLUE}Updating CVE-2017-8570.${NC}"
      cd /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8570 ; git pull
@@ -273,7 +272,6 @@ else
   git clone https://github.com/rxwx/CVE-2017-8570.git /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8570
   echo
 fi
-
 if [ -d /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8759/.git ]; then
      echo -e "${BLUE}Updating Exploit toolkit CVE-2017-8759.${NC}"
      cd /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8759 ; git pull
@@ -799,6 +797,16 @@ else
   echo
   echo -e "${YELLOW}Beginning avet's Setup.${NC}"
   /usr/bin/bash /opt/RedTeam-Toolkit/Weaponization/avet/setup.sh
+  echo
+fi
+
+if [ -d /opt/RedTeam-Toolkit/Weaponization/Invoke-CradleCrafter/.git ]; then
+     echo -e "${BLUE}Updating Invoke-CradleCrafter.${NC}"
+     cd /opt/RedTeam-Toolkit/Weaponization/Invoke-CradleCrafter; git pull
+     echo
+else
+  echo -e "${YELLOW}Downloading Invoke-CradleCrafter.${NC}"
+  git clone https://github.com/danielbohannon/Invoke-CradleCrafter /opt/RedTeam-Toolkit/Weaponization/Invoke-CradleCrafter
   echo
 fi
 
