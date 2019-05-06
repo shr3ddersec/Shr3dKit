@@ -16,6 +16,10 @@ bash shr3dkit.sh
 ```
 **Change Log**
 ```
+May-06-2019
+Code: Added Invoke-CradleCrafter to Weaponization.
+--------------------------------------------------
+April-2019
 Fixed: macro_pack, LaZagne
 Code: Added all requirements to script, seperated pip requirements and merged to one file.
 
