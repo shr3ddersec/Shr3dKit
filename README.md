@@ -16,6 +16,9 @@ bash shr3dkit.sh
 ```
 **Change Log**
 ```
+June-13-2019
+Tools Added: Added CobaltStrike-ToolKit mimipenguin PyKEK ACLight
+--------------------------------------------------
 May-06-2019
 Code: Added Invoke-CradleCrafter to Weaponization.
 --------------------------------------------------
