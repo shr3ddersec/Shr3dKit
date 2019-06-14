@@ -17,7 +17,7 @@ bash shr3dkit.sh
 **Change Log**
 ```
 June-13-2019
-Tools Added: Added CobaltStrike-ToolKit mimipenguin PyKEK ACLight
+Tools Added: Added CobaltStrike-ToolKit, mimipenguin, PyKEK, ACLight
 --------------------------------------------------
 May-06-2019
 Code: Added Invoke-CradleCrafter to Weaponization.
@@ -254,6 +254,7 @@ https://github.com/HarmJ0y/DAMP
 https://github.com/l0ss/Grouper
 * **ADRecon** is a tool which extracts various artifacts (as highlighted below) out of an AD environment in a specially formatted Microsoft Excel report that includes summary views with metrics to facilitate analysis. https://github.com/sense-of-security/ADRecon
 * **ADACLScanner** one script for ACL's in Active Directory. https://github.com/canix1/ADACLScanner
+* **ACLight** a useful script for advanced discovery of Domain Privileged Accounts that could be targeted - including Shadow Admins. https://github.com/cyberark/ACLightv
 * **LAPSToolkit** a tool to audit and attack LAPS environments. https://github.com/leoloobeek/LAPSToolkit
 * **PingCastle** is a free, Windows-based utility to audit the risk level of your AD infrastructure and check for vulnerable practices. https://www.pingcastle.com/download
 * **RiskySPNs** is a collection of PowerShell scripts focused on detecting and abusing accounts associated with SPNs (Service Principal Name). https://github.com/cyberark/RiskySPN
