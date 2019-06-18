@@ -21,10 +21,8 @@ fi
 # Updating Kali 
 echo -e "Updating Kali."
 apt update ; apt-get -y upgrade ; apt-get -y dist-upgrade ; apt-get -y autoremove ; apt-get -y autoclean ; echo
-
-# Installing Dependencies for the repos
-apt -y install git apache2 python-requests libapache2-mod-php python-pymssql build-essential python-pexpect python-pefile python-crypto python-openssl libssl1.0-dev libffi-dev python-dev python-pip tcpdump python-virtualenv build-essential cmake libgtk-3-dev libboost-all-dev ; echo
-
+echo -e "Installing Veil"
+apt install veil
 # Making Directories
 mkdir -p /opt/RedTeam-Toolkit/{Reconnaissance/{Active,Passive},Frameworks,Weaponization,Delivery/{Phishing},"Command and Control"/{"Remote Access",Staging},"Lateral Movement","Establish Foothold","Escalate Privileges"/{"Domain Escalation","Local Escalation"},"Data Exfiltration"}
 
@@ -193,9 +191,6 @@ else
   echo -e "Downloading pwnedOrNot."
   git clone https://github.com/thewhiteh4t/pwnedOrNot.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/pwnedOrNot
   echo
-  echo -e "Running Installer."
-  cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/pwnedOrNot/ ; /usr/bin/bash install.sh
-  echo
 fi
 
 if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/GitHarvester/.git ]; then
@@ -213,7 +208,7 @@ if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/pwndb/.git ]; then
      cd /opt/RedTeam-Toolkit/Reconnaissance/Passive/pwndb ; git pull
      echo
 else
-  echo -e "Downloading GitHarvester."
+  echo -e "Downloading pwnndb."
   git clone https://github.com/davidtavarez/pwndb.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/pwndb
   echo
 fi
@@ -230,8 +225,8 @@ else
   echo -e "Downloading SpiderFoot."
   git clone https://github.com/smicallef/spiderfoot.git /opt/RedTeam-Toolkit/Frameworks/spiderfoot
   echo
-  echo -e "Running SpiderFoot's Installer."
-  cd /opt/RedTeam-Toolkit/Frameworks/spiderfoot ; /usr/bin/python setup.py install
+  echo -e "Grabbing pip3 Requirements."
+  cd /opt/RedTeam-Toolkit/Frameworks/spiderfoot ; pip3 install -r requirements.txt
   echo
 fi
 
@@ -242,16 +237,6 @@ if [ -d /opt/RedTeam-Toolkit/Frameworks/datasploit/.git ]; then
 else
   echo -e "Downloading datasploit."
   git clone https://github.com/DataSploit/datasploit.git /opt/RedTeam-Toolkit/Frameworks/datasploit
-  echo
-fi
-
-if [ -d /opt/RedTeam-Toolkit/Frameworks/recon-ng/.git ]; then
-     echo -e "Updating Recon-ng."
-     cd /opt/RedTeam-Toolkit/Frameworks/recon-ng ; git pull
-     echo
-else
-  echo -e "Downloading Recon-ng."
-  git clone https://github.com/DataSploit/datasploit.git /opt/RedTeam-Toolkit/Frameworks/recon-ng
   echo
 fi
 
@@ -437,18 +422,6 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/Weaponization/Veil/.git ]; then
-     echo -e "Updating Veil."
-     cd /opt/RedTeam-Toolkit/Weaponization/Veil; git pull
-     echo
-else
-  echo -e "Downloading Veil."
-  git clone https://github.com/Veil-Framework/Veil.git /opt/RedTeam-Toolkit/Weaponization/Veil
-  echo -e "Installing Veil."
-  /usr/bin/bash /opt/RedTeam-Toolkit/Weaponization/Veil/config/setup.sh --force --silent
-  echo
-fi
-
 if [ -d /opt/RedTeam-Toolkit/Weaponization/CheckPlease/.git ]; then
      echo -e "Updating CheckPlease."
      cd /opt/RedTeam-Toolkit/Weaponization/CheckPlease; git pull
@@ -539,17 +512,7 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/Weaponization/social-engineer-toolkit/.git ]; then
-     echo -e "Updating The Social-Engineer Toolkit."
-     cd /opt/RedTeam-Toolkit/Weaponization/social-engineer-toolkit ; git pull
-     echo
-else
-  echo -e "Downloading The Social-Engineer Toolkit."
-  git clone https://github.com/trustedsec/social-engineer-toolkit.git /opt/RedTeam-Toolkit/Weaponization/social-engineer-toolkit
-  echo
-  echo -e "Running Installer."
-  cd /opt/RedTeam-Toolkit/Weaponization/social-engineer-toolkit ; /usr/bin/python setup.py install
-fi
+# Removed Social-Engineer Toolkit - type setoolkit in terminal
 
 if [ -d /opt/RedTeam-Toolkit/Weaponization/phishery/.git ]; then
      echo -e "Updating phishery."
@@ -951,8 +914,9 @@ else
   echo -e "Downloading PoshC2_Python."
   git clone https://github.com/nettitude/PoshC2_Python.git /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/PoshC2_Python/
   echo
+  git clone https://github.com/nettitude/PoshC2_Python.git /opt/Poshc2_Python
   echo -e "Installing PoshC2_Python."
-  /usr/bin/bash /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/PoshC2_Python/Install.sh
+  /usr/bin/bash "/opt/RedTeam-Toolkit/Command and Control/Remote Access/PoshC2_Python/Install.sh"
   echo
 fi
 
