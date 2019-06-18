@@ -9,6 +9,11 @@ Use this script to grab majority of the repos.
 **Total Size (so far): 2.5+Gb**
 
 Install Guide:
+
+```
+apt -y install git apache2 python-requests libapache2-mod-php python-pymssql build-essential python-pexpect python-pefile python-crypto python-openssl libssl1.0-dev libffi-dev python-dev python-pip tcpdump python-virtualenv build-essential cmake libgtk-3-dev libboost-all-dev libx11-dev libatlas-base-dev libboost-python-dev pkg-config
+```
+
 ```
 git clone https://github.com/shr3ddersec/Shr3dKit.git
 pip install -r requirements.txt
