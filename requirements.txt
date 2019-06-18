@@ -14,12 +14,11 @@ cryptography==2.6.1
 django
 dlib
 dnslib
-ee/util
 emailprotectionslib>=0.8.2
 facebook-sdk
 face_recognition
 Flask==1.0.2
-ftplib
+pyftpdlib
 GitPython==2.1.1
 idna==2.8
 -i https://pypi.python.org/simple
@@ -28,14 +27,13 @@ importlib==1.0.4
 ipdb
 ipython
 itsdangerous==0.24
-Jinja2>=2.10.1
+Jinja2
 ldap3>=2.5
 ldapdomaindump
 MarkupSafe==1.0
 matplotlib
 netifaces
 pexpect
-PIL
 pillow
 pprint
 progressbar
@@ -69,7 +67,5 @@ tldextract
 tqdm
 truffleHogRegexes==0.0.4
 unittest2==1.1.0
-urllib2
-urllib3
 Werkzeug==0.14.1
 wsgidav>=2.4.1
