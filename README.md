@@ -35,8 +35,6 @@ Tools Added: Modlishka, pwndb, cat-sites, Phantom-Evasion
 ```
 **Phantom Evasion Forewarning**
 
-Currently pursuing a permanent an IT Sec role, for personal budgeting I added this tool as does a fantastic job for AV Evasion without opening up your wallet. *Keep in mind, this does have crypto miner (xmr-stak) installer option. I kept the complete install out of script purposely for this reason*. To disable, please change ```Miner=False``` in Setup/Config.txt then run the script. You may always keep it on to help the devs, such as myself in my home lab.
-
 ## Contents
 * [Reconnaissance](#reconnaissance)
 * [Weaponization](#weaponization)
