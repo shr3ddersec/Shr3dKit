@@ -233,7 +233,8 @@ else
   git clone https://github.com/smicallef/spiderfoot.git /opt/RedTeam-Toolkit/Frameworks/spiderfoot
   echo
   echo -e "Grabbing pip3 Requirements."
-  cd /opt/RedTeam-Toolkit/Frameworks/spiderfoot ; pip3 install -r requirements.txt
+  apt-get install python-pip -y
+  cd /opt/RedTeam-Toolkit/Frameworks/spiderfoot ; pip install -r requirements.txt
   echo
 fi
 
