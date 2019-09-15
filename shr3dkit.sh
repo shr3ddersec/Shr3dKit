@@ -119,7 +119,7 @@ if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape/.git ]; then
      echo
 else
   echo -e "Downloading linkScrape."
-  git clone https://github.com/NickSanzotta/linkScrape.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape
+  git clone https://github.com/rosstripi/linkScrape /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape
   echo
 fi
 
