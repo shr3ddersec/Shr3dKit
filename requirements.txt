@@ -67,5 +67,5 @@ tldextract
 tqdm
 truffleHogRegexes==0.0.4
 unittest2==1.1.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 wsgidav>=2.4.1
