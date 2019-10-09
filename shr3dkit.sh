@@ -955,7 +955,7 @@ if [ -d /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/FactionC2/.gi
      echo
 else
   echo -e "Downloading FactionC2."
-  git clone https://github.com/FactionC2.git /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/FactionC2/
+  git clone https://github.com/FactionC2/Faction.git /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/FactionC2/
   echo
 fi
 
