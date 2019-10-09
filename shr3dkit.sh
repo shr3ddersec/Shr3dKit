@@ -20,9 +20,16 @@ fi
 
 # Updating Kali 
 echo -e "Updating Kali."
-apt update ; apt-get -y upgrade ; apt-get -y dist-upgrade ; apt-get -y autoremove ; apt-get -y autoclean ; echo
+# Remove interactive installs
+export DEBIAN_FRONTEND=noninteractive
+apt-get update
+apt-get -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-remove-essential --allow-downgrades -y upgrade
+apt-get -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-remove-essential --allow-downgrades -y dist-upgrade -q 
+apt-get -y autoremove
+apt-get -y autoclean
+
 echo -e "Installing Veil"
-apt install veil
+apt install veil -y
 # Making Directories
 mkdir -p /opt/RedTeam-Toolkit/{Reconnaissance/{Active,Passive},Frameworks,Weaponization,Delivery/{Phishing},"Command and Control"/{"Remote Access",Staging},"Lateral Movement","Establish Foothold","Escalate Privileges"/{"Domain Escalation","Local Escalation"},"Data Exfiltration"}
 
@@ -46,11 +53,11 @@ if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Active/AWSBucketDump/.git ]; then
      echo
 else
   echo -e "Downloading AWSBucketDump."
-  git clone https://github.com/jordanpotti/AWSBucketDump.git /opt/RedTeam-Toolkit/Reconnaissance/Active/EyeWitness
+  git clone https://github.com/jordanpotti/AWSBucketDump.git /opt/RedTeam-Toolkit/Reconnaissance/Active/AWSBucketDump
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Active/AWSBucketDump/.git ]; then
+if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Active/AQUATONE/.git ]; then
      echo -e "Updating AQUATONE."
      cd /opt/RedTeam-Toolkit/Reconnaissance/Active/AQUATONE ; git pull
      echo
@@ -70,13 +77,13 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Active/AWSBucketDump/.git ]; then
+if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Active/dnsrecon/.git ]; then
      echo -e "Updating dnsrecon."
      cd /opt/RedTeam-Toolkit/Reconnaissance/Active/dnsrecon ; git pull
      echo
 else
   echo -e "Downloading dnsrecon."
-  git clone https://github.com/darkoperator/dnsrecon.git /opt/RedTeam-Toolkit/Reconnaissance/Active/spoofcheck
+  git clone https://github.com/darkoperator/dnsrecon.git /opt/RedTeam-Toolkit/Reconnaissance/Active/dnsrecon
   echo
 fi
 
@@ -119,7 +126,7 @@ if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape/.git ]; then
      echo
 else
   echo -e "Downloading linkScrape."
-  git clone https://github.com/NickSanzotta/linkScrape.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape
+  git clone https://github.com/rosstripi/linkScrape.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape
   echo
 fi
 
@@ -129,7 +136,7 @@ if [ -d /opt/RedTeam-Toolkit/Reconnaissance/Passive/FOCA/.git ]; then
      echo
 else
   echo -e "Downloading FOCA."
-  git clone https://github.com/ElevenPaths/FOCA.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/linkScrape
+  git clone https://github.com/ElevenPaths/FOCA.git /opt/RedTeam-Toolkit/Reconnaissance/Passive/FOCA
   echo
 fi
 
@@ -226,7 +233,8 @@ else
   git clone https://github.com/smicallef/spiderfoot.git /opt/RedTeam-Toolkit/Frameworks/spiderfoot
   echo
   echo -e "Grabbing pip3 Requirements."
-  cd /opt/RedTeam-Toolkit/Frameworks/spiderfoot ; pip3 install -r requirements.txt
+  apt-get install python-pip -y
+  cd /opt/RedTeam-Toolkit/Frameworks/spiderfoot ; pip install -r requirements.txt
   echo
 fi
 
@@ -252,6 +260,7 @@ else
   git clone https://github.com/rxwx/CVE-2017-8570.git /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8570
   echo
 fi
+
 if [ -d /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8759/.git ]; then
      echo -e "Updating Exploit toolkit CVE-2017-8759."
      cd /opt/RedTeam-Toolkit/Weaponization/CVE-2017-8759 ; git pull
@@ -374,7 +383,7 @@ fi
 
 if [ -d /opt/RedTeam-Toolkit/Weaponization/Invoke-DOSfuscation/.git ]; then
      echo -e "Updating Invoke-DOSfuscation."
-     cd /opt/RedTeam-Toolkit/Weaponization/Invoke-Obfuscation; git pull
+     cd /opt/RedTeam-Toolkit/Weaponization/Invoke-DOSfuscation; git pull
      echo
 else
   echo -e "Downloading Invoke-DOSfuscation."
@@ -482,16 +491,6 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/Weaponization/StarFighters/.git ]; then
-     echo -e "Updating StarFighters."
-     cd /opt/RedTeam-Toolkit/Weaponization/StarFighters; git pull
-     echo
-else
-  echo -e "Downloading StarFighters."
-  git clone https://github.com/Cn33liz/StarFighters.git /opt/RedTeam-Toolkit/Weaponization/StarFighters
-  echo
-fi
-
 if [ -d /opt/RedTeam-Toolkit/Weaponization/nps_payload/.git ]; then
      echo -e "Updating nps_payload."
      cd /opt/RedTeam-Toolkit/Weaponization/nps_payload; git pull
@@ -541,16 +540,6 @@ if [ -d /opt/RedTeam-Toolkit/Weaponization/UltimateAppLockerByPassList/.git ]; t
 else
   echo -e "Downloading Ultimate AppLocker ByPass List."
   git clone https://github.com/api0cradle/UltimateAppLockerByPassList.git /opt/RedTeam-Toolkit/Weaponization/UltimateAppLockerByPassList
-  echo
-fi
-
-if [ -d /opt/RedTeam-Toolkit/Weaponization/Ruler/.git ]; then
-     echo -e "Updating Ruler."
-     cd /opt/RedTeam-Toolkit/Weaponization/Ruler ; git pull
-     echo
-else
-  echo -e "Downloading Ruler."
-  git clone https://github.com/sensepost/ruler.git /opt/RedTeam-Toolkit/Weaponization/Ruler
   echo
 fi
 
@@ -654,7 +643,7 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/Weaponization/SpookFlareF/.git ]; then
+if [ -d /opt/RedTeam-Toolkit/Weaponization/SpookFlare/.git ]; then
      echo -e "Updating SpookFlare."
      cd /opt/RedTeam-Toolkit/Weaponization/SpookFlare ; git pull
      echo
@@ -840,16 +829,6 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/Delivery/Phishing/PhishingPretexts/.git ]; then
-     echo -e "Updating PhishingPretexts."
-     cd /opt/RedTeam-Toolkit/Delivery/Phishing/PhishingPretexts; git pull
-     echo
-else
-  echo -e "Downloading PhishingPretexts."
-  git clone https://github.com/L4bF0x/PhishingPretexts.git /opt/RedTeam-Toolkit/Delivery/Phishing/PhishingPretexts
-  echo
-fi
-
 if [ -d /opt/RedTeam-Toolkit/Delivery/Phishing/Modlishka/.git ]; then
      echo -e "Updating Modlishka."
      cd /opt/RedTeam-Toolkit/Delivery/Phishing/Modlishka; git pull
@@ -976,7 +955,7 @@ if [ -d /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/FactionC2/.gi
      echo
 else
   echo -e "Downloading FactionC2."
-  git clone https://github.com/FactionC2.git /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/FactionC2/
+  git clone https://github.com/FactionC2/Faction.git /opt/RedTeam-Toolkit/"Command and Control"/"Remote Access"/FactionC2/
   echo
 fi
 
@@ -1041,26 +1020,6 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/Chameleon/.git ]; then
-     echo -e "Updating Chameleon."
-     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/Chameleon/; git pull
-     echo
-else
-  echo -e "Downloading Chameleon."
-  git clone https://github.com/mdsecactivebreach/Chameleon.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/Chameleon/
-  echo
-fi
-
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/CatMyPhish/.git ]; then
-     echo -e "Updating CatMyPhish."
-     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/CatMyPhish/; git pull
-     echo
-else
-  echo -e "Downloading CatMyPhish."
-  git clone https://github.com/Mr-Un1k0d3r/CatMyPhish.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/CatMyPhish/
-  echo
-fi
-
 if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/CatMyPhish/.git ]; then
      echo -e "Updating CatMyPhish."
      cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/CatMyPhish/; git pull
@@ -1081,7 +1040,7 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/Malleable-C2-Profiles/.git ]; then
+if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/Malleable-C2-Randomizer/.git ]; then
      echo -e "Updating Malleable-C2-Randomizer."
      cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/Malleable-C2-Randomizer/; git pull
      echo
@@ -1136,12 +1095,12 @@ fi
 if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/mod_rewrite/.htaccess ]; then
      echo -e "Script is there; skipping."
 else
-  echo -e "Downloading Apache2-Mod-Rewrite-Setup."
-  git clone https://github.com/n0pe-sled/Apache2-Mod-Rewrite-Setup.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/Apache2-Mod-Rewrite-Setup/
+  echo -e "Downloading mod_rewrite."
+  wget https://gist.githubusercontent.com/curi0usJack/971385e8334e189d93a6cb4671238b10/raw/fc9faac1634335eb7f8ffd390954f1c3c9cd9ea5/.htaccess -O /opt/RedTeam-Toolkit/"Command and Control"/Staging/mod_rewrite/.htaccess
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/external_c2 framework/.git ]; then
+if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/external_c2_framework/.git ]; then
      echo -e "Updating external_c2_framework."
      cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/external_c2_framework/; git pull
      echo
@@ -1151,23 +1110,13 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/external_c2 framework/.git ]; then
+if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/ExternalC2/.git ]; then
      echo -e "Updating ExternalC2."
      cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/ExternalC2/; git pull
      echo
 else
   echo -e "Downloading ExternalC2."
   git clone https://github.com/ryhanson/ExternalC2.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/ExternalC2/
-  echo
-fi
-
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/cs2modrewrite/.git ]; then
-     echo -e "Updating cs2modrewrite."
-     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/cs2modrewrite/; git pull
-     echo
-else
-  echo -e "Downloading cs2modrewrite."
-  git clone https://github.com/threatexpress/cs2modrewrite.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/cs2modrewrite/
   echo
 fi
 
@@ -1211,16 +1160,6 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/Google-Domain-fronting/.git ]; then
-     echo -e "Updating Google-Domain-fronting."
-     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/Google-Domain-fronting/; git pull
-     echo
-else
-  echo -e "Downloading Google-Domain-fronting."
-  git clone https://github.com/redteam-cyberark/Google-Domain-fronting.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/Google-Domain-fronting/
-  echo
-fi
-
 if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/DomainFrontDiscover/.git ]; then
      echo -e "Updating DomainFrontDiscover."
      cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/DomainFrontDiscover/; git pull
@@ -1238,16 +1177,6 @@ if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/RedTeam-Automation/.g
 else
   echo -e "Downloading Automated Empire Infrastructure."
   git clone https://github.com/bneg/RedTeam-Automation.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/RedTeam-Automation/
-  echo
-fi
-
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/meek/.git ]; then
-     echo -e "Updating meek."
-     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/meek/; git pull
-     echo
-else
-  echo -e "Downloading meek."
-  git clone https://github.com/arlolra/meek.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/meek/
   echo
 fi
 
@@ -1301,16 +1230,6 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/ExternalC2/.git ]; then
-     echo -e "Updating ExternalC2."
-     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/ExternalC2/; git pull
-     echo
-else
-  echo -e "Downloading ExternalC2."
-  git clone https://github.com/ryhanson/ExternalC2.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/ExternalC2/
-  echo
-fi
-
 if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/DoHC2/.git ]; then
      echo -e "Updating DoHC2."
      cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/DoHC2/; git pull
@@ -1338,16 +1257,6 @@ if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/now-you-see-me/.git ]
 else
   echo -e "Downloading now-you-see-me."
   git clone https://github.com/audrummer15/now-you-see-me.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/now-you-see-me/
-  echo
-fi
-
-if [ -d /opt/RedTeam-Toolkit/"Command and Control"/Staging/CobaltStrike-ToolKit/.git ]; then
-     echo -e "Updating CobaltStrike-ToolKit."
-     cd /opt/RedTeam-Toolkit/"Command and Control"/Staging/CobaltStrike-ToolKit/; git pull
-     echo
-else
-  echo -e "Downloading CobaltStrike-ToolKit ."
-  git clone https://github.com/killswitch-GUI/CobaltStrike-ToolKit.git /opt/RedTeam-Toolkit/"Command and Control"/Staging/CobaltStrike-ToolKit/
   echo
 fi
 
@@ -1416,16 +1325,6 @@ else
   echo
 fi
 
-if [ -d /opt/RedTeam-Toolkit/"Lateral Movement"/SharpHound/.git ]; then
-     echo -e "Updating SharpHound."
-     cd /opt/RedTeam-Toolkit/"Lateral Movement"/SharpHound/; git pull
-     echo
-else
-  echo -e "Downloading SharpHound."
-  git clone https://github.com/BloodHoundAD/SharpHound.git /opt/RedTeam-Toolkit/"Lateral Movement"/SharpHound/
-  echo
-fi
-
 if [ -d /opt/RedTeam-Toolkit/"Lateral Movement"/BloodHound.py/.git ]; then
      echo -e "Updating BloodHound.py."
      cd /opt/RedTeam-Toolkit/"Lateral Movement"/BloodHound.py/; git pull
@@ -1473,16 +1372,6 @@ if [ -d /opt/RedTeam-Toolkit/"Lateral Movement"/nishang/.git ]; then
 else
   echo -e "Downloading nishang."
   git clone https://github.com/samratashok/nishang.git /opt/RedTeam-Toolkit/"Lateral Movement"/nishang/
-  echo
-fi
-
-if [ -d /opt/RedTeam-Toolkit/"Lateral Movement"/Inveigh/.git ]; then
-     echo -e "Updating Inveigh."
-     cd /opt/RedTeam-Toolkit/"Lateral Movement"/Inveigh/; git pull
-     echo
-else
-  echo -e "Downloading Inveigh."
-  git clone https://github.com/Kevin-Robertson/Inveigh.git /opt/RedTeam-Toolkit/"Lateral Movement"/Inveigh/
   echo
 fi
 
@@ -1588,7 +1477,7 @@ fi
 
 if [ -d /opt/RedTeam-Toolkit/"Lateral Movement"/Internal-Monologue/.git ]; then
      echo -e "Updating Internal-Monologue."
-     cd /opt/RedTeam-Toolkit/"Lateral Movement"/PSAttack/; git pull
+     cd /opt/RedTeam-Toolkit/"Lateral Movement"/Internal-Monologue/; git pull
      echo
 else
   echo -e "Downloading Internal-Monologue."
@@ -1812,7 +1701,7 @@ if [ -d /opt/RedTeam-Toolkit/"Escalate Privileges"/"Domain Escalation"/ADRecon/.
      echo
 else
   echo -e "Downloading ADRecon."
-  git clone https://github.com/sense-of-security/ADRecon.git /opt/RedTeam-Toolkit/"Escalate Privileges"/"Domain Escalation"/ADRecon/
+  git clone https://github.com/adrecon/ADRecon.git /opt/RedTeam-Toolkit/"Escalate Privileges"/"Domain Escalation"/ADRecon/
   echo
 fi
 
