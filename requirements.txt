@@ -10,7 +10,7 @@ click
 clr>=1.0.3
 codecov==2.0.15
 colorama
-cryptography==2.6.1
+cryptography==3.2
 django
 dlib
 dnslib
