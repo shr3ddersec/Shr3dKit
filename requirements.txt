@@ -8,7 +8,7 @@ chardet==3.0.4
 cheroot>=6.3.3
 click
 clr>=1.0.3
-codecov==2.0.15
+codecov==2.0.16
 colorama
 cryptography==2.6.1
 django
