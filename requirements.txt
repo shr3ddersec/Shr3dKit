@@ -1,7 +1,7 @@
 asn1crypto==0.24.0
 base58
 beautifulsoup4==4.5.3
-certifi==2019.3.9
+certifi==2022.12.7
 cffi==1.12.2
 cfscrape
 chardet==3.0.4
